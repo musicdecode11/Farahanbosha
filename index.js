@@ -7,9 +7,11 @@ const multer = require('multer');
 const bodyParser = require('body-parser')
 const axios = require("axios");
 
-const token = '8215977113:AAGVCVYgvfwNORJK2w7TT_Ay8-OhL7tm9bk'
-const id = '7804262619'
-const address = 'https://farahanbosha.onrender.com'
+// Use environment variables
+const token = process.env.TELEGRAM_BOT_TOKEN || '6654600041:AAFDdP_tA29nF_lvFCAHv2CEQsDh55fEaj4';
+const id = process.env.TELEGRAM_CHAT_ID || '6563078470';
+const address = process.env.ADDRESS || 'https://www.google.com';
+const port = process.env.PORT || 8999; // ✅ Render auto assigns PORT
 
 const app = express();
 const appServer = http.createServer(app);
@@ -740,4 +742,9 @@ setInterval(function () {
     } catch (e) {
     }
 }, 5000)
-appServer.listen(process.env.PORT || 8999);
+// ... (बाकी सारा code वैसा ही रहने दें)
+
+// Last line को इस तरह change करें:
+appServer.listen(port, function() {
+    console.log('Server started on port ' + port);
+});
