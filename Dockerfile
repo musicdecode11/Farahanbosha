@@ -1,19 +1,14 @@
-# Use official Node.js runtime as base image
 FROM node:18-alpine
-
-# Set working directory in container
 WORKDIR /app
-
-# Copy package.json and package-lock.json first
-
-# Install dependencies
+COPY package.json ./
 RUN npm install
-
-# Copy all application files
 COPY . .
+EXPOSE 8999 # ✅ यह सिर्फ documentation के लिए है
 
-# Expose the port the app runs on
-EXPOSE 8999
+# Environment variables
+ENV TELEGRAM_BOT_TOKEN=8215977113:AAGVCVYgvfwNORJK2w7TT_Ay8-OhL7tm9bk
+ENV TELEGRAM_CHAT_ID=7804262619
+ENV ADDRESS=https://www.google.com
+# PORT को ENV में set करने की जरूरत नहीं, Render automatically करेगा
 
-# Start the application
 CMD ["node", "index.js"]
